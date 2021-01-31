@@ -6,7 +6,7 @@ This app is my first e-commerce app and is still in production.
 There are some bugs to fix but feel free to look around. 
 Also have to add registration page.
 
-** Features used in the app are: **
+#### Features used in the app are:
 
 * ASP.NET MVC Web Application
 * Microsoft Sql Server Management Studio 18

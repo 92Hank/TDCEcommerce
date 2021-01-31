@@ -1,0 +1,30 @@
+﻿@model TheDogsCorner.Models.Home.HomeIndexModel
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row container">
+    @{
+        <h2><b>Kategorilista</b>, klicka för att få fram produkter per kategori!</h2>
+        foreach (var item in Model.ListOfCategories)
+        {
+            <div class="col-md-12">
+                <div class="category-list">
+                    <div class="nav-menus">
+
+                        <ul class="nav nav-pills">
+                            <li class="active"><a style="border-radius:initial;" href="#">@item.KategoriNamn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+<div class="container">
+    @Html.PagedListPager(Model.ListOfCategories, page => Url.Action("CategoryPartial", new { page, search = Request.QueryString["search"] }))
+</div>

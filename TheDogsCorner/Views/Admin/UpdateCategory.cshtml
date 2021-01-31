@@ -1,0 +1,43 @@
+﻿@model TheDogsCorner.Models.KategoriBeskrivning
+@{
+    ViewBag.Title = "UpdateCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+    <!-- DataTables Example -->
+<div class="card mb-3">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="../Admin/Dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item "> <a href="../Admin/Categories">Kategorier</a></li>
+        <li class="breadcrumb-item active">Lägg till ny Kategori</li>
+
+    </ol>
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Lägg till ny Kategori
+
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("UpdateCategory", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(m => m.KategoriId)
+
+        <div class="form-group">
+
+            <h4>Kategori</h4>
+            <hr />
+            @Html.TextBoxFor(m => m.KategoriNamn, new { @class = "form-control", placeholder = "Ange KategoriNamn", required = "required", autofocus = "autofocus" })
+            @Html.ValidationMessageFor(m => m.KategoriNamn, "", new { @class = "text-danger" })
+        </div>
+
+            <a onclick="window.history.back();" class="btn btn-danger">Avbryt</a>
+            <input type="submit" class="btn btn-primary" value="Spara" />
+        }
+    </div>
+</div>
+
+

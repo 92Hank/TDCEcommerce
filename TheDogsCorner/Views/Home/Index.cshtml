@@ -1,0 +1,117 @@
+﻿@model TheDogsCorner.Models.Home.HomeIndexModel
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="themeSlider" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#themeSlider" data-slide-to="0" class="active"></li>
+        <li data-target="#themeSlider" data-slide-to="1"></li>
+        <li data-target="#themeSlider" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="imgOverlay"></div>
+            <img style="height:720px;width:100%" src="../Images/hundnalle.jpg" alt="First slide">
+            <div class="carousel-caption">
+                <h3>Nyhet</h3>
+                <p>Checka in det här häftiga gosedjuret från KONG!</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:720px;width:100%" src="../Images/hundbeddar.jpg" alt="Second slide">
+            <div class="carousel-caption">
+                <h3>Hundsäng</h3>
+                <p>Mjuk och go hundbädd i snygg design, din pälskling kommer älska den.</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:720px;width:100%" src="../Images/ruffsele.jpg" alt="Third slide">
+            <div class="carousel-caption">
+                <h3>Senaste</h3>
+                <p>Din fyrbenta vän är väl utrustad för varje äventyr!</p>
+            </div>
+        </div>
+    </div>
+
+    <a class="left carousel-control" href="#themeSlider" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#themeSlider" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
+
+</div>
+
+<div class="olContent f1"><h2 style="color:black">Sök Produkt/Kategori</h2></div>
+<form method="post">
+    <div class="olSearch fr">
+        <input type="text" name="search" placeholder="Sök..." class="inputComn houseText form-control" />
+        <div class="searchIcon">
+            <button type="submit" class="searchBtn">
+                <img src="~/Images/IconSearch3.png" />
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Våra Produkter <small>Rekommenderat för dig</small></h2>
+        </div>
+    </div>
+</div>
+
+<div class="row product-container">
+    @foreach (var item in Model.ListOfProducts)
+    {
+        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+            <div class="thumbnail product-item" style="height:300px">
+
+                <img class="img-responsive" title="Klicka för att se produktbeskrivning"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/ProductImg/@item.ProductImage" />
+
+                <div class="caption">
+                    <h5>@item.ProduktNamn</h5>
+                    <p>@item.Pris kr</p>
+                    <p>
+                        @if (item.Kvantitet > 0)
+                        {
+                            using (Html.BeginForm("AddToCart", "Home", new { productId = item.ProduktId }, FormMethod.Post))
+                            {
+                                <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
+                            }
+                            <p>Finns i lager</p>
+                        }
+                        else
+                        {
+                            <p>Slut i lager</p>
+                        }
+                    </p>
+                    <div class="product-item-badge">
+                        @if (item.IsFeatured == true)
+                        {
+                            <p>Ny</p>
+                        }
+                        else
+                        {
+                            <p>Gammal</p>
+                        }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+</div>
+<div class="container">
+    @Html.PagedListPager(Model.ListOfProducts, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }))
+</div>

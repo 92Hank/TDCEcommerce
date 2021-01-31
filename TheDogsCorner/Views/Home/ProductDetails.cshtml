@@ -1,0 +1,60 @@
+﻿@model TheDogsCorner.Models.Home.HomeIndexModel
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Home/Index.cshtml";
+}
+
+<div class="container">
+
+
+
+
+    <div class="card-body">
+        @foreach (var item in Model.ListOfProducts)
+        {
+            <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+                <div class="thumbnail product-item" style="height:300px">
+
+                    <img class="img-responsive" a href="@Url.Action("Produktinformation", "ProductDetails", new { productid = item.ProduktId })" title="Klicka för att se produktbeskrivning"
+                         style="cursor:pointer;height:160px;width:100%"
+                         src="~/ProductImg/@item.ProductImage" />
+
+                    <div class="caption">
+                        <h5>@item.ProduktNamn</h5>
+                        <h5>@item.Beskrivning</h5>
+
+                        <p>@item.Pris kr</p>
+                        <p>
+                            @if (item.Kvantitet > 0)
+                            {
+                            <p>Finns i lager</p>
+                        }
+                        else
+                        {
+                            <p>Slut i lager</p>
+                        }
+                            </p>
+                            <div class="product-item-badge">
+                                @if (item.IsFeatured == true)
+                                {
+                                    <p>Ny</p>
+                                }
+                                else
+                                {
+                                    <p>Gammal</p>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.ActionLink("Back to List", "Index")
+            }
+
+    </div>
+
+</div>
+

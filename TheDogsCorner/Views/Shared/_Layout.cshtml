@@ -1,0 +1,171 @@
+﻿@using TheDogsCorner.Models.Home;
+@model TheDogsCorner.Models.Home.HomeIndexModel
+@using PagedList;
+@using PagedList.Mvc;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - The Dog's Corner</title>
+    @*@Styles.Render("~/Content/css")*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/MyMainLayOut.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="logo">
+                    <h1><a href="../Home/Index"><span><img src="~/Images/dogIcon2.png" alt="The Dog's Corner" height="35" /> The</span> Dog's Corner</a></h1>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a style="border-radius:initial;" href="../Home/Login">Logga in</a></li>
+                    <!-- Nav Item - User Information -->
+                    <li class="active">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" id="userDropdown">Logga ut <b class="caret"></b></a>
+
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><b>Inloggad som:</b> @Session["Username"] [@Session["Role"]]</span>
+
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+                    <li class="active">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Varukorg(3) <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @if (Session["Cart"] != null)
+                            {
+                                foreach (var item in (List<Item>)Session["Cart"])
+                                {
+                                    <li>
+                                        <a href="@Url.Action("RemoveFromCart","Home", new { productId = item.Produkt.ProduktId })">@item.Produkt.ProduktNamn (@item.Kvantitet) <i class="fa fa-times"></i></a>
+                                    </li>
+                                }
+                            }
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("Checkout","Home")">Checkout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="nav-menus">
+
+                    <ul class="nav nav-pills">
+                        <li class="active"><a style="border-radius:initial;" href="../Home/Index">Hem</a></li>
+                        <li class="active"><a style="border-radius:initial;" href="../Home/Contact">Kontakt</a></li>
+                        <li class="active"><a style="border-radius:initial;" href="../Home/About">Om oss</a></li>
+                        <li class="active"><a style="border-radius:initial;" href="../Admin/Dashboard">Admin</a></li>
+                        <li class="active"><a style="border-radius:initial;" href="../Category/CategoryPartial">Kategorier</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="row">
+                <div class="col-md-12 copyright">
+
+                    <div class="col-md-6 col-sm-6 copyright-left">
+                        <p>&copy; @DateTime.Now.Year - The Dog's Corner - Webshop.</p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 copyright-right">
+
+                        <ul class="list-unstyled list-social">
+                            <li><a href="#" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="@Url.Action("Logout", "Home")">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script>
+    function checkLogin() {
+        var data = JSON.stringify({
+            username: $("#exampleInputUser").val(),
+            password: $("#exampleInputPassword").val()
+        });
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Home/CheckLogin",
+            data: data,
+            success: function (result) {
+                if (result == true) {
+                    window.location.href = "/Home/Index";
+                }
+                else {
+                    window.location.href = "/Home/Login";
+                }
+            },
+            error: function () {
+                alert("Error!")
+            }
+        });
+    }
+</script>

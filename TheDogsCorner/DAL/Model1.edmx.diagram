@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5b5ed871cb2848999dc209a3d19c50b8" Name="Diagram1">
+        <EntityTypeShape EntityType="TheDogsCornerModel.BildSpel" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheDogsCornerModel.Kategori" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheDogsCornerModel.OrderDetail" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheDogsCornerModel.Orders" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheDogsCornerModel.Produkt" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheDogsCornerModel.RolePermission" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheDogsCornerModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TheDogsCornerModel.Users" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="TheDogsCornerModel.FK__Produkt__Kategor__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="TheDogsCornerModel.FK__OrderDeta__Order__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="TheDogsCornerModel.FK__OrderDeta__Produ__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="TheDogsCornerModel.FK__Produkt__UsersId__4F7CD00D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

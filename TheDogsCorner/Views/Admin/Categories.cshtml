@@ -1,0 +1,67 @@
+﻿@model List<TheDogsCorner.DAL.Kategori>
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+    <!-- DataTables Example -->
+<div class="card mb-4">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="../Admin/Dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Kategorier</li>
+    </ol>
+    <div class="card-header">
+
+        <div class="col-md-12">
+            <div class="nav-menus">
+
+                <ul class="nav nav-pills">
+                    <li class="active"><a style="border-radius:initial;" href="../Admin/AddCategory" class="btn btn-info fa-pull-right">Lägg till Kategori</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>KategoriNamn</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>KategoriNamn</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@(Model.IndexOf(item)+1)</td>
+                            <td>@item.KategoriNamn</td>
+                            <td>@Html.ActionLink("Redigera", "CategoryEdit", new { catId = item.KategoriId })</td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+

@@ -12,5 +12,5 @@ Also have to add registration page.
 * Microsoft Sql Server Management Studio 18
 * Login page
 * To add items to cart you have to be logged in
-* Admin dashboard where you can manage produkts, categories and orders
+* Admin dashboard where you can manage products, categories and orders
 
